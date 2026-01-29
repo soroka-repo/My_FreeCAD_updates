@@ -5,8 +5,9 @@
     a { text-decoration: none; }
 </style>
 </ol><a href="index.html#PROCEDUREFreeCAD102"><font color="blue"><h3 align='left'>  FreeCAD 1.0.2</h3></font></a><ol>
-<font color="black"><h3 align='center'>VERSION: 20260129:1644 Peter Soroka</font></h3>
+<font color="black"><h3 align='center'>VERSION: 20260129:1741 Peter Soroka</font></h3>
 <li><a href="index.html#NOTEPreface"><font color="black"> Preface</font></a></li>
+</ol><a href="index.html#PROCEDUREFreeCADinstallationonaRaspberryPI5"><font color="blue"><h3 align='left'>  FreeCAD installation on a Raspberry PI 5</h3></font></a><ol>
 </ol><a href="index.html#PROCEDUREImport3DprinterSTLfileandprepareitformodifications"><font color="blue"><h3 align='left'>  Import 3D printer STL file and prepare it for modifications</h3></font></a><ol>
 <li><a href="index.html#STEPCreateaprojectandimportthefile"> Create a project and import the file</a></li>
 ######################################################################
@@ -15,13 +16,44 @@
 #
 ######################################################################
 
-</h4></pre><font size="2"><h1 align='center'>VERSION: 20260129:1644 Peter Soroka</h1></font><pre><h4>
+</h4></pre><font size="2"><h1 align='center'>VERSION: 20260129:1741 Peter Soroka</h1></font><pre><h4>
 
 </h4></pre><h3 align='left' id="NOTEPreface">NOTE: Preface</h3><pre><h4>
    General notes for FreeCAD use...
 
 <a href="https://wiki.freecad.org/User_hub"><font color="black">FreeCAD User_hub:<font color="blue"> https://wiki.freecad.org/User_hub<font color="black"></a>
 <a href="https://wiki.freecad.org/Power_users_hub"><font color="black">FreeCAD Power_users_hub:<font color="blue"> https://wiki.freecad.org/Power_users_hub<font color="black"></a>
+
+
+######################################################################
+#
+</h4></pre><h2 align='left' id="PROCEDUREFreeCADinstallationonaRaspberryPI5">PROCEDURE: FreeCAD installation on a Raspberry PI 5</h2><pre><h4>
+#######################################################################
+# The RPI5 works well with FreeCAD it's much quicker then the RPI4
+
+###################################
+### FreeCAD install with Flatpack to get the latest version
+###################################
+
+ sudo apt update
+ sudo apt install -y flatpak
+ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repflathub.flatpakrepo
+
+### MAKER
+ sudo flatpak install -y --system flathub org.freecad.FreeCAD  ### CAD/CAM 2D 3D
+ sudo flatpak install -y flathub org.gimp.GIMP                 ### GNU Image Manipulation
+
+# flatpack management
+
+# List installed flatpaks
+flatpak list
+
+# List all available applications
+flatpak remote-ls flathub --app
+
+# Update just flatpaks
+flatpak update
+
 
 ######################################################################
 #

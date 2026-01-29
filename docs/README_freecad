@@ -4,13 +4,44 @@
 #
 ######################################################################
 
-###VERSION: 20260129:1644 Peter Soroka
+###VERSION: 20260129:1741 Peter Soroka
 
 ###NOTE: Preface
    General notes for FreeCAD use...
 
 ###LINK: "FreeCAD User_hub:" "https://wiki.freecad.org/User_hub"
 ###LINK: "FreeCAD Power_users_hub:" "https://wiki.freecad.org/Power_users_hub"
+
+
+######################################################################
+#
+###PROCEDURE: FreeCAD installation on a Raspberry PI 5   
+#######################################################################
+# The RPI5 works well with FreeCAD it's much quicker then the RPI4
+
+###################################
+### FreeCAD install with Flatpack to get the latest version
+###################################
+
+ sudo apt update
+ sudo apt install -y flatpak
+ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repflathub.flatpakrepo
+
+### MAKER
+ sudo flatpak install -y --system flathub org.freecad.FreeCAD  ### CAD/CAM 2D 3D
+ sudo flatpak install -y flathub org.gimp.GIMP                 ### GNU Image Manipulation
+
+# flatpack management
+
+# List installed flatpaks
+flatpak list
+
+# List all available applications
+flatpak remote-ls flathub --app
+
+# Update just flatpaks
+flatpak update
+
 
 ######################################################################
 #
