@@ -4,7 +4,7 @@
 #
 ######################################################################
 
-###VERSION: 20260129:1741 Peter Soroka
+###VERSION: 20260129:1910 Peter Soroka
 
 ###NOTE: Preface
    General notes for FreeCAD use...
@@ -14,8 +14,16 @@
 
 
 ######################################################################
-#
-###PROCEDURE: FreeCAD installation on a Raspberry PI 5   
+###STEP: FreeCAD preferences
+######################################################################
+ __ "Preferences" under "Part/Part Design" "General" click on "Allow Multiple Solids"
+
+ 
+
+ so far using all the rest as the Defaults
+
+######################################################################
+###STEP: FreeCAD installation on a Raspberry PI 5   
 #######################################################################
 # The RPI5 works well with FreeCAD it's much quicker then the RPI4
 
@@ -27,9 +35,10 @@
  sudo apt install -y flatpak
  sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repflathub.flatpakrepo
 
-### MAKER
+### Useful MAKER Apps
  sudo flatpak install -y --system flathub org.freecad.FreeCAD  ### CAD/CAM 2D 3D
  sudo flatpak install -y flathub org.gimp.GIMP                 ### GNU Image Manipulation
+ sudo flatpak install -y flathub org.inkscape.Inkscape         ### Inkscape
 
 # flatpack management
 
@@ -44,8 +53,7 @@ flatpak update
 
 
 ######################################################################
-#
-###PROCEDURE: Import 3D printer STL file and prepare it for modifications   
+###STEP: Import 3D printer STL file and prepare it for modifications   
 #######################################################################
 ###STEP: Create a project and import the file
  ___ create a new Project: "File", "New", "Click (select) the Unnamed" and "File" "SaveAs" and give the new project a name.
@@ -55,3 +63,71 @@ flatpak update
  ___ delete the imported STL file: from the "Combo View", "Model" tab Left Mouse click on the STL file, then Right Mouse Click, then choose "Delete"
  ___ create a copy and refine it: select the new shape that was created, from the top toolbar select "Part", "Create a Copy" ( the new model now has fewer shapes )
  ___ convert to solid: from the "Combo View" "Model" tab select the latest object, from the top toolbar "Part"    
+
+
+
+######################################################################
+###STEP: 3D Printing turn a .jpg to a sketch then extrude it 
+#######################################################################
+# Use Inkscape to convert your .jpg to a bitmap
+#
+ __1) Import the image (*.jpg) into Inkscape ("File", "Import")
+      except the defaults from the import screen
+ __1a) click the "Edit" tab then "resize the page to image"
+ __2) Trace the image goto "Path" then "Trace to Bitmap" then "Apply"
+ __2a) "Delete" the original image
+ __2b) "Edit" then "resize page to image"
+ __3) "Save" file as a plain *.svg file ( not as a Inkscape SVG )
+ __4) Switch over to FreeCAD, "start a new part" and "create a body"
+      then "file import" select the *.svg that was saved from Inkscape
+      and in the pop-up menu select "SVG as geometry"
+ __5) Select the Paths you want to use: Switch to "Draft" with the Path (piece)
+      selected then click "Path to sketch"
+ __5a) Pick and do the same ti all the paths (pieces) which you will extrude to
+       the same level
+ __5b) Once you get the paths converted to sketches then switch to "Sketcher"
+       select all the sletches and then "Merge Sletches"
+ __5c) Housekeeping: delete the unmerged sketches and hit the spacebar the Paths 
+       you already used to make them invisible
+ __6) go to "Part Design" and extrude the sketches  
+
+
+######################################################################
+###STEP: Creating Text on your design
+######################################################################
+# Your dir in Linux for the fonts is at:
+# /usr/share/fonts/...
+
+# The best default to get the "T" for Univercity of Tennessee is at:
+# /usr/share/fonts/truetype/freefont/Free Mono Bold
+
+ __1) to add Text to your Part got "Drafting" then  "Shape from Text" and select
+      your text and font and size 
+ __2) go back to "Part Design" a "Boolean Union Cut or Fuse with the base object (Part)
+
+# Install the "font manager" to better view all the fonts
+  sudo apt font-manager
+# then just type font-manager in a linux terminal to see all the installed fonts
+
+# note: helvetica-255 is a good simple font that 3D prints very good at a small size
+#
+# The following is an example of how to download a font that was found with a goggle search
+# search for "download font helvetica-255" it will take you to the "font.download" site
+# in a linux terminal
+ __1) download the font and unzip it 
+ sudo mv helvetica-255 /usr/share/fonts/trutype/. ### move it to the correct directory
+ cd /usr/share/fonts/truetype  ### change to that directory
+ ls -altr ### you will see that the new font doen not have the correct privliges
+ sudo chown -R root:root helvetica-255 ### change the owner and group recursivly to the neww font dir
+ sudo chmod 644 helvetica-255/* ### change the premissions 
+ 
+
+# The following are recomendations of fonts to use for 3D printing
+ - TrueTYPE Fonts TTF = clearly readable easy to print
+ - Sans-Serif Fonts = lack of fine detail good for 3D printing
+ - Arial/Arial Black = clear even strokes
+ - Helvetica = clean consistent strokes good for small size
+ - DejaVuSans = common opensource font within Linux
+ - Roboto/Ubunti = moderen very readable and printable
+
+ 
