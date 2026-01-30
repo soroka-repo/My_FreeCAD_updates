@@ -5,7 +5,7 @@
     a { text-decoration: none; }
 </style>
 </ol><a href="index.html#PROCEDUREFreeCAD102"><font color="blue"><h3 align='left'>  FreeCAD 1.0.2</h3></font></a><ol>
-<font color="black"><h3 align='center'>VERSION: 20260129:1910 Peter Soroka</font></h3>
+<font color="black"><h3 align='center'>VERSION: 20260129:1933 Peter Soroka</font></h3>
 <li><a href="index.html#NOTEPreface"><font color="black"> Preface</font></a></li>
 <li><a href="index.html#STEPFreeCADpreferences"> FreeCAD preferences</a></li>
 <li><a href="index.html#STEPFreeCADinstallationonaRaspberryPI5"> FreeCAD installation on a Raspberry PI 5</a></li>
@@ -19,7 +19,7 @@
 #
 ######################################################################
 
-</h4></pre><font size="2"><h1 align='center'>VERSION: 20260129:1910 Peter Soroka</h1></font><pre><h4>
+</h4></pre><font size="2"><h1 align='center'>VERSION: 20260129:1933 Peter Soroka</h1></font><pre><h4>
 
 </h4></pre><h3 align='left' id="NOTEPreface">NOTE: Preface</h3><pre><h4>
    General notes for FreeCAD use...
@@ -146,4 +146,30 @@ flatpak update
  - Roboto/Ubunti = moderen very readable and printable
 
  
+######################################################################
+### FreeCAD TorMACH 1100MX CAM post processor
+######################################################################
+
+   There is no native CAM post processor for the TorMACH 1100MX so since
+ TorMACH bases their systems on linuxcnc I'm going to take the FreeCAD's
+ linuxcnc_post.py and use it to create TorMach_post.py at this time the
+ file will create output but have not yet actual tried it on the Tormach...
+
+ The file can be downloaded in this branch:
+          My_FreeCAD_updates/Tormach/TorMach_post.py
+
+ just download the file and on linux place it in the following directory
+ in your /home/* 
+    ~/.local/share/FreeCAD/Macro
+
+    FYI: ~/  = the shortcut to your home dir
+
+  and I believe that was all I did to make it show up as a selection for the CAM
+ post processing
+
+
+
+######################################################################
+#           End of File
+######################################################################
 </header></pre></body></html>
