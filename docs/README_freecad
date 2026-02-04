@@ -4,7 +4,7 @@
 #
 ######################################################################
 
-###VERSION: 20260129:1933 Peter Soroka
+###VERSION: 20260204:15433 Peter Soroka
 
 ###NOTE: Preface
    General notes for FreeCAD use...
@@ -33,7 +33,8 @@
 
  sudo apt update
  sudo apt install -y flatpak
- sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repflathub.flatpakrepo
+ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 
 ### Useful MAKER Apps
  sudo flatpak install -y --system flathub org.freecad.FreeCAD  ### CAD/CAM 2D 3D
