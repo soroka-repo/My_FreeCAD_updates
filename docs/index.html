@@ -5,7 +5,7 @@
     a { text-decoration: none; }
 </style>
 </ol><a href="index.html#PROCEDUREFreeCAD102110"><font color="blue"><h3 align='left'>  FreeCAD 1.0.2, 1.1.0</h3></font></a><ol>
-<font color="black"><h3 align='center'>VERSION: 20260326:1924 Peter Soroka</font></h3>
+<font color="black"><h3 align='center'>VERSION: 20260326:2325 Peter Soroka</font></h3>
 <li><a href="index.html#NOTEPreface"><font color="black"> Preface</font></a></li>
 <li><a href="index.html#STEPFreeCADpreferences"> FreeCAD preferences</a></li>
 <li><a href="index.html#STEPFreeCADinstallationonaRaspberryPI5"> FreeCAD installation on a Raspberry PI 5</a></li>
@@ -14,13 +14,15 @@
 <li><a href="index.html#STEP3DPrintingturnajpgtoasketchthenextrudeit"> 3D Printing turn a .jpg to a sketch then extrude it</a></li>
 <li><a href="index.html#STEPCreatingTextonyourdesign"> Creating Text on your design</a></li>
 <li><a href="index.html#STEPManagingFontsforyourDesigns"> Managing Fonts for your Designs</a></li>
+<li><a href="index.html#STEPVCARVEStepsforText"> VCARVE Steps for Text</a></li>
+<li><a href="index.html#STEPFreeCADTorMACH1100MXCAMpostprocessor"> FreeCAD TorMACH 1100MX CAM post processor</a></li>
 ######################################################################
 #
 </h4></pre><h2 align='left' id="PROCEDUREFreeCAD102110">PROCEDURE: FreeCAD 1.0.2, 1.1.0</h2><pre><h4>
 #
 ######################################################################
 
-</h4></pre><font size="2"><h1 align='center'>VERSION: 20260326:1924 Peter Soroka</h1></font><pre><h4>
+</h4></pre><font size="2"><h1 align='center'>VERSION: 20260326:2325 Peter Soroka</h1></font><pre><h4>
 
 </h4></pre><h3 align='left' id="NOTEPreface">NOTE: Preface</h3><pre><h4>
    General notes for FreeCAD use...
@@ -208,11 +210,39 @@
 #
 
 
+
+# A Font with a good Heart that can be vcarved (2in with a 6mm 60degree works well) is at:
+# /usr/share/fonts/truetype/dejavu/DejaVuMathTeXGyre.ttf
+# use the font-manager to copy the heart into the Draft ShapeString
+
+
+
 # The best default to get the "T" for Univercity of Tennessee is at:
 # /usr/share/fonts/truetype/freefont/Free Mono Bold
  
+
 ######################################################################
-### FreeCAD TorMACH 1100MX CAM post processor
+</h4></pre><h3 align='left' id="STEPVCARVEStepsforText">STEP: VCARVE Steps for Text</h3><pre><h4>
+######################################################################
+
+ __ Use Part Design, create the body and a sketch of the Stock size and place a corner of the stock at X00 Y00
+ __ Pad the Sketch in the Reverse direction to the thickness of the stock
+ __ Use the Draft workbench to add a ShapeString (the big S Shape to Text)
+ __ if the Text is connected Use the Draft WB to Upgrade (the up arrorw) the ShapeString so the
+    text will be separate letters which is better for the CAM Vcarve operation 
+ __ make sure the added Shapestring is within the Body ( use Tools and Dependency graph to check)
+ __ use Part Design to Pocket the the Shapestring with a minimum Length of 0.10 inch 
+ __ repeat the steps if you need to use a different font, if you need to copy a symbol that is not 
+    on your keyboard you can use the font-manager to copy-n-paste to the Draft, Shape to Text.
+ __ Use CAM workbench New Job select Body, 
+      Setup, Stock, Use existing solid, Click the yellow dot to define the material 
+      General, Label you can change the Job name
+      Output, select your Output File Name,  Processor linuxcnc, Arguments --inches and G54 work coordinate        
+      Tools select you vbit make sure the H and V feeds are set along with the spindle slpeed
+      OK
+
+######################################################################
+</h4></pre><h3 align='left' id="STEPFreeCADTorMACH1100MXCAMpostprocessor">STEP: FreeCAD TorMACH 1100MX CAM post processor</h3><pre><h4>
 ######################################################################
 
    There is no native CAM post processor for the TorMACH 1100MX so since
