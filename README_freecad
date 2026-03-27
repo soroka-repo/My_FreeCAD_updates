@@ -1,10 +1,10 @@
 ######################################################################
 #
-###PROCEDURE: FreeCAD 1.0.2 
+###PROCEDURE: FreeCAD 1.0.2, 1.1.0 
 #
 ######################################################################
 
-###VERSION: 20260321:1325 Peter Soroka
+###VERSION: 20260326:1901 Peter Soroka
 
 ###NOTE: Preface
    General notes for FreeCAD use...
@@ -63,6 +63,22 @@
 
 ### Update just flatpaks
  flatpak update
+
+
+######################################################################
+### After FreeCAD is installed make sure Graphviz is installed for the
+### Tools, Dependancy Graph to work 
+######################################################################
+
+ sudo apt update
+ sudo install graphviz ### to install
+ which dot ### graphviz = dot, so this verified the install
+### in FreeCAD you must set the path for the tool to work
+ -> Tools, -> Edit Parameters, -> BaseApp, -> Preferences, -> Paths
+ Then Right click mouse on the right Panel and select "New String Item"
+ Enter the name: Graphviz    ### note must be a capitial "G"
+ Enter the text: /usr/bin    ### which is the path returned from the above "which dot" command
+ "Save"
 
 
 ######################################################################
