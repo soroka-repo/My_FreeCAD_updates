@@ -4,8 +4,8 @@
 <style>
     a { text-decoration: none; }
 </style>
-</ol><a href="index.html#PROCEDUREFreeCAD102"><font color="blue"><h3 align='left'>  FreeCAD 1.0.2</h3></font></a><ol>
-<font color="black"><h3 align='center'>VERSION: 20260204:15433 Peter Soroka</font></h3>
+</ol><a href="index.html#PROCEDUREFreeCAD102110"><font color="blue"><h3 align='left'>  FreeCAD 1.0.2, 1.1.0</h3></font></a><ol>
+<font color="black"><h3 align='center'>VERSION: 20260326:1924 Peter Soroka</font></h3>
 <li><a href="index.html#NOTEPreface"><font color="black"> Preface</font></a></li>
 <li><a href="index.html#STEPFreeCADpreferences"> FreeCAD preferences</a></li>
 <li><a href="index.html#STEPFreeCADinstallationonaRaspberryPI5"> FreeCAD installation on a Raspberry PI 5</a></li>
@@ -13,13 +13,14 @@
 <li><a href="index.html#STEPCreateaprojectandimportthefile"> Create a project and import the file</a></li>
 <li><a href="index.html#STEP3DPrintingturnajpgtoasketchthenextrudeit"> 3D Printing turn a .jpg to a sketch then extrude it</a></li>
 <li><a href="index.html#STEPCreatingTextonyourdesign"> Creating Text on your design</a></li>
+<li><a href="index.html#STEPManagingFontsforyourDesigns"> Managing Fonts for your Designs</a></li>
 ######################################################################
 #
-</h4></pre><h2 align='left' id="PROCEDUREFreeCAD102">PROCEDURE: FreeCAD 1.0.2</h2><pre><h4>
+</h4></pre><h2 align='left' id="PROCEDUREFreeCAD102110">PROCEDURE: FreeCAD 1.0.2, 1.1.0</h2><pre><h4>
 #
 ######################################################################
 
-</h4></pre><font size="2"><h1 align='center'>VERSION: 20260204:15433 Peter Soroka</h1></font><pre><h4>
+</h4></pre><font size="2"><h1 align='center'>VERSION: 20260326:1924 Peter Soroka</h1></font><pre><h4>
 
 </h4></pre><h3 align='left' id="NOTEPreface">NOTE: Preface</h3><pre><h4>
    General notes for FreeCAD use...
@@ -31,41 +32,69 @@
 ######################################################################
 </h4></pre><h3 align='left' id="STEPFreeCADpreferences">STEP: FreeCAD preferences</h3><pre><h4>
 ######################################################################
- __ "Preferences" under "Part/Part Design" "General" click on "Allow Multiple Solids"
 
- 
+### allows working with multiple objects in "Part Design" for use in desiging 3D Print
+### print-in-place designs:
+ __ "Edit", "Preferences", "Part/Part Design", "General" click on "Allow Multiple Solids"
 
- so far using all the rest as the Defaults
+### CAM when using linuxcnc on a CNC requiring postprocessing in inches:
+ __ "switch to the CAM toolbox", "Edit", "Preferences", "CAM", "job Preferences", "Post Processor"
+    "Default Path" = Enter the path for your NC post processor files 
+    "Default Post Processor" = linuxcnc
+    "Default Arguments" = --inches 
+
+
+### so far using all the rest as the Defaults
 
 ######################################################################
 </h4></pre><h3 align='left' id="STEPFreeCADinstallationonaRaspberryPI5">STEP: FreeCAD installation on a Raspberry PI 5</h3><pre><h4>
 #######################################################################
-# The RPI5 works well with FreeCAD it's much quicker then the RPI4
+# The RPI5 works well with FreeCAD it's much quicker then the RPI4, I've tested it on both Debian and Raspberry OS.
 
 ###################################
-### FreeCAD install with Flatpack to get the latest version
+### FreeCAD install with flatpak to get the latest version 
 ###################################
 
+  Flatpak is the latest package/application distribution for Linux it allows the application to be packages
+ just once and then be able to be installed on many of the Linux distros ( RedHad, Ubuntu, Debian, Raspberry OS...)
+ It has made application packaging more standard and handles pre-reqs smoothly.
+
+### Install flatpak
  sudo apt update
  sudo apt install -y flatpak
  sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-
-### Useful MAKER Apps
+### FreeCad and other useful MAKER Apps
  sudo flatpak install -y --system flathub org.freecad.FreeCAD  ### CAD/CAM 2D 3D
  sudo flatpak install -y flathub org.gimp.GIMP                 ### GNU Image Manipulation
  sudo flatpak install -y flathub org.inkscape.Inkscape         ### Inkscape
 
-# flatpack management
+### flatpack management
 
-# List installed flatpaks
-flatpak list
+### List installed flatpaks
+ flatpak list
 
-# List all available applications
-flatpak remote-ls flathub --app
+### List all available applications
+ flatpak remote-ls flathub --app
 
-# Update just flatpaks
-flatpak update
+### Update just flatpaks
+ flatpak update
+
+
+######################################################################
+### After FreeCAD is installed make sure Graphviz is installed for the
+### Tools, Dependancy Graph to work 
+######################################################################
+
+ sudo apt update
+ sudo install graphviz ### to install
+ which dot ### graphviz = dot, so this verified the install
+### in FreeCAD you must set the path for the tool to work
+-&gt Tools, -&gt Edit Parameters, -&gt BaseApp, -&gt Preferences, -&gt Paths
+ Then Right click mouse on the right Panel and select "New String Item"
+ Enter the name: Graphviz    ### note must be a capitial "G"
+ Enter the text: /usr/bin    ### which is the path returned from the above "which dot" command
+ "Save"
 
 
 ######################################################################
@@ -111,15 +140,18 @@ flatpak update
 ######################################################################
 </h4></pre><h3 align='left' id="STEPCreatingTextonyourdesign">STEP: Creating Text on your design</h3><pre><h4>
 ######################################################################
-# Your dir in Linux for the fonts is at:
-# /usr/share/fonts/...
-
-# The best default to get the "T" for Univercity of Tennessee is at:
-# /usr/share/fonts/truetype/freefont/Free Mono Bold
-
  __1) to add Text to your Part got "Drafting" then  "Shape from Text" and select
       your text and font and size 
  __2) go back to "Part Design" a "Boolean Union Cut or Fuse with the base object (Part)
+
+
+######################################################################
+</h4></pre><h3 align='left' id="STEPManagingFontsforyourDesigns">STEP: Managing Fonts for your Designs</h3><pre><h4>
+######################################################################
+# Your dir in Linux for the system wide fonts is at:
+# /usr/share/fonts/...
+# if you would like the new fonts to be under your userid place them in:
+# ~/.local/share/fonts/...   (note ~ means your home dir "/home/(your userid)" )
 
 # Install the "font manager" to better view all the fonts
   sudo apt font-manager
@@ -133,10 +165,10 @@ flatpak update
  __1) download the font and unzip it 
  sudo mv helvetica-255 /usr/share/fonts/trutype/. ### move it to the correct directory
  cd /usr/share/fonts/truetype  ### change to that directory
- ls -altr ### you will see that the new font doen not have the correct privliges
+ ls -altr ### you will see that the new font does not have the correct privliges
  sudo chown -R root:root helvetica-255 ### change the owner and group recursivly to the neww font dir
  sudo chmod 644 helvetica-255/* ### change the premissions 
- 
+ sudo fc-cache -fv ### updates the font cache so applications can use them
 
 # The following are recomendations of fonts to use for 3D printing
  - TrueTYPE Fonts TTF = clearly readable easy to print
@@ -146,6 +178,38 @@ flatpak update
  - DejaVuSans = common opensource font within Linux
  - Roboto/Ubunti = moderen very readable and printable
 
+# The Following for Vcarve CAM operations
+ -  Best Overall for Readability = Arial (Bold or Regular), Times New Roman, Verdana.
+ -  Best Script/Fancy = Blacksword, Yellowtail, English Script.
+ -  Best Small Text = Arial Rounded Bold (avoids sharp corners that break, easy to read).
+ -  Best "Classic" Look = Old English (needs to be larger then 2.5 inches)
+
+# Tips for Selecting VCarve Fonts
+ - Monoline Fonts =  These are excellent for quick, simple text without complex V-bit plunge depths, 
+   as they work well with simple profile cuts.
+ - Avoid Overly Intricate Fonts: Fonts with small, busy, or rough textures do not cut well and can cause jagged edges.
+ - Script Font Management: Always ensure script letters overlap adequately. You may need to weld letters 
+   together in VCarve to prevent the tool from cutting through the interior of the letters.
+ - Spacing Matters: Small text requires larger spacing between letters (kerning) to avoid "pocketing" where the 
+   letters merge together.
+ - Tool Choice: A 60degree V-bit is widely considered best for smaller text, offering better detail than a
+   90degree bit.
+
+# The Following are recomendations of cursive fonts for use in vcarve CAM operations
+ -  English Script = A top choice that does not have vectors that are too close together
+ -  Blacksword = A popular, elegant choice often recommended on community forums
+ -  Lavenderia and Handlew = Recommended for clean, readable engraved results
+ -  Sarina = Excellent for scripts that need to be clean and easily bridged
+ -  Kristi = Good for a signature or handwriting style 
+# VCarve Script Font Tips:
+    Weld Letters: Ensure cursive letters overlap, then use the "weld" tool to create a single connected carving, notes this YouTube video.
+    Avoid Irregular Edges: Avoid fonts like Blackadder that have jagged or overly complex edges, which turn out poorly, according to a Carbide 3D Community Site forum post.
+    Tool Choice: Use 30-degree or 60-degree V-bits for finer, more detailed cursive lettering, especially for smaller text.#
+#
+
+
+# The best default to get the "T" for Univercity of Tennessee is at:
+# /usr/share/fonts/truetype/freefont/Free Mono Bold
  
 ######################################################################
 ### FreeCAD TorMACH 1100MX CAM post processor
