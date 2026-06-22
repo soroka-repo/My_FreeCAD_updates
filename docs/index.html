@@ -5,7 +5,7 @@
     a { text-decoration: none; }
 </style>
 </ol><a href="index.html#PROCEDUREFreeCAD102110"><font color="blue"><h3 align='left'>  FreeCAD 1.0.2, 1.1.0</h3></font></a><ol>
-<font color="black"><h3 align='center'>VERSION: 20260326:2325 Peter Soroka</font></h3>
+<font color="black"><h3 align='center'>VERSION: 20260622:1512 Peter Soroka</font></h3>
 <li><a href="index.html#NOTEPreface"><font color="black"> Preface</font></a></li>
 <li><a href="index.html#STEPFreeCADpreferences"> FreeCAD preferences</a></li>
 <li><a href="index.html#STEPFreeCADinstallationonaRaspberryPI5"> FreeCAD installation on a Raspberry PI 5</a></li>
@@ -22,7 +22,7 @@
 #
 ######################################################################
 
-</h4></pre><font size="2"><h1 align='center'>VERSION: 20260326:2325 Peter Soroka</h1></font><pre><h4>
+</h4></pre><font size="2"><h1 align='center'>VERSION: 20260622:1512 Peter Soroka</h1></font><pre><h4>
 
 </h4></pre><h3 align='left' id="NOTEPreface">NOTE: Preface</h3><pre><h4>
    General notes for FreeCAD use...
@@ -82,22 +82,20 @@
 ### Update just flatpaks
  flatpak update
 
-
 ######################################################################
 ### After FreeCAD is installed make sure Graphviz is installed for the
 ### Tools, Dependancy Graph to work 
 ######################################################################
 
  sudo apt update
- sudo install graphviz ### to install
- which dot ### graphviz = dot, so this verified the install
+ sudo apt install graphviz ### to install
+ which dot ### graphviz = dot, so this will verify the install
 ### in FreeCAD you must set the path for the tool to work
 -&gt Tools, -&gt Edit Parameters, -&gt BaseApp, -&gt Preferences, -&gt Paths
  Then Right click mouse on the right Panel and select "New String Item"
  Enter the name: Graphviz    ### note must be a capitial "G"
  Enter the text: /usr/bin    ### which is the path returned from the above "which dot" command
  "Save"
-
 
 ######################################################################
 </h4></pre><h3 align='left' id="STEPImport3DprinterSTLfileandprepareitformodifications">STEP: Import 3D printer STL file and prepare it for modifications</h3><pre><h4>
