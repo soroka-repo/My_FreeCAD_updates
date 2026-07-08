@@ -4,7 +4,7 @@
 #
 ######################################################################
 
-###VERSION: 20260622:1512 Peter Soroka
+###VERSION: 20260708:1037 Peter Soroka
 
 ###NOTE: Preface
    General notes for FreeCAD use...
@@ -233,7 +233,10 @@
  The file can be downloaded in this branch:
           My_FreeCAD_updates/Tormach/TorMach_post.py
 
+###LINK: "TorMach_Post.py" "https://github.com/soroka-repo/My_FreeCAD_updates/blob/main/Tormach/TorMach_post.py"
+
  just download the file and on linux place it in the following directory
+
  in your /home/* 
     ~/.local/share/FreeCAD/Macro
 
